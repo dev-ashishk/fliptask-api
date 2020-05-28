@@ -39,8 +39,8 @@ const init = async (moduleObj) => {
 
     const PORT = process.env.PORT || 8080;
     app.listen(PORT, () => {
-        console.log(`App listening to ${PORT}....`);
-        console.log("Press Ctrl+C to quit.");
+        Print.success(`App listening to ${PORT}....`);
+        Print.success("Press Ctrl+C to quit.");
     });
 };
 

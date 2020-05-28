@@ -9,10 +9,10 @@ const init = async () => {
             const dep = file.split(".")[0];
             acc[dep] = res;
             global[dep] = acc[dep];
-            console.info(`[INFO] Dependency [${file}] loaded from [middlewares]`);
+            Print.info(`Dependency [${file}] loaded from [middlewares]`);
             return acc;
         } catch (e) {
-            console.error(`[Error] Unable to load ${file}`, e);
+            Print.error(`Unable to load ${file}`, e);
             return e;
         }
     }, {});

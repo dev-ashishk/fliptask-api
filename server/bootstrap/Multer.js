@@ -3,7 +3,7 @@ const util = require("util");
 const path = require("path");
 
 const init = () => {
-    console.log("[MULTER LOADED] >>>>>>");
+    Print.info("[MULTER LOADED] >>>>>>");
     const storage = multer.diskStorage({
         destination: (req, file, callback) => {
             callback(null, path.resolve(__dirname, "../upload"));

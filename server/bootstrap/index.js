@@ -2,30 +2,33 @@ const path = require("path");
 
 const env = process.env.NODE_ENV === "production" ? "prod.env" : "dev.env";
 require("dotenv").config({
-    path: path.resolve(__dirname, `../env/${env}`)
+    path: path.resolve(__dirname, `../../env/${env}`)
 });
 
 const loadDependency = async (type, dep, moduleObj) => {
     try {
-        const res = await require(`./${type}/${dep}`);
+        const res = await require(path.resolve(__dirname, `../${type}/${dep}`));
         global[dep] = typeof (res) === "function" ? await res(moduleObj) : await res;
         moduleObj[dep] = global[dep];
-        console.info(`[INFO] Dependency [${dep}] loaded from [${type}]`);
+        Print.success(`Dependency [${dep}] loaded from [${type}]`);
         return global[dep];
     } catch (e) {
-        console.error(`[Error] Unable to load ${dep}\n`, e);
-        return e;
+        Print.error(`Unable to load ${dep}\n`, e);
+        throw Error(e);
     }
 };
 const configuration = {
+    base: [
+        "Print"
+    ],
     services: [
         "MailerService"
     ],
-    config: [
+    bootstrap: [
         "Multer",
         "Mailer",
         "Logger",
-        "DB",
+        "Db",
         "Model",
         "Middleware",
         "Controller",
